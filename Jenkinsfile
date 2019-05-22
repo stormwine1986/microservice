@@ -4,11 +4,15 @@ pipeline {
         maven 'M3'
     }
     stages {
+    
+    	 stage('Information') {
+    	     sh "java -version";
+             sh "mvn -veriosn";
+    	 }
+
         stage('Build') { 
             steps {
-                // 
-                sh "java -version"
-                sh "mvn -veriosn"
+                sh "mvn clean package";
             }
         }
         stage('Test') { 
