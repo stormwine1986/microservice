@@ -2,7 +2,6 @@ pipeline {
     agent any 
     tools {
         maven 'M3';
-        docker 'docker';
     }
     stages {
 
@@ -19,9 +18,9 @@ pipeline {
         stage('Deploy') { 
             steps {
                  echo "Deploy";
-                 script{
+                 docker.withServer("unix:///var/run/docker.sock"){
         			docker.build("demo");
-    			}
+                 }
             }
         }
     }
