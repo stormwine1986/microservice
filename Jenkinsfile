@@ -15,16 +15,7 @@ pipeline {
         stage('Build') { 
             steps {
                 sh "mvn clean package";
-                
-                step([$class: 'DockerBuilderPublisher', 
-                	cleanImages: false, 
-                	cleanupWithJenkinsJobDelete: false, 
-                	cloud: 'docker', 
-                	dockerFileDirectory: './', 
-                	fromRegistry: [], 
-                	pushCredentialsId: '', 
-                	pushOnSuccess: false, 
-                	tagsString: 'demo']);
+                docker.build("demo");
             }
         }
         stage('Test') { 
