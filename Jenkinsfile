@@ -1,6 +1,6 @@
 pipeline {
     agent any 
-    def maven_home = tool name: 'M3', type: 'maven';
+    def maven_home = ${tool name: 'M3', type: 'maven'};
     stages {
         stage('Build') { 
             steps {
