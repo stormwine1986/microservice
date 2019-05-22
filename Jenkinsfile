@@ -19,7 +19,7 @@ pipeline {
             steps {
                  echo "Deploy";
                  script{
-                 	sh "curl -X GET http://127.0.0.1:2375"
+                 	sh "curl -X GET http://registry:5000/v1"
         			//docker.build("demo")
     			}
             }
