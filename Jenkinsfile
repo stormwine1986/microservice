@@ -15,7 +15,16 @@ pipeline {
         stage('Build') { 
             steps {
                 sh "mvn clean package";
-                def customImage = docker.build("demo:${env.BUILD_ID}");
+                
+                step([$class: 'DockerBuilderPublisher', 
+                	cleanImages: false, 
+                	cleanupWithJenkinsJobDelete: false, 
+                	cloud: 'docker', 
+                	dockerFileDirectory: './', 
+                	fromRegistry: [], 
+                	pushCredentialsId: '', 
+                	pushOnSuccess: false, 
+                	tagsString: 'demo']);
             }
         }
         stage('Test') { 
