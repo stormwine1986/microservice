@@ -8,7 +8,7 @@ pipeline {
             steps {
                 // 
                 sh "java -version"
-                sh "mvn --veriosn"
+                sh "mvn -veriosn"
             }
         }
         stage('Test') { 
