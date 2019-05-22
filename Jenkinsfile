@@ -1,16 +1,9 @@
 pipeline {
     agent any 
     tools {
-        maven 'M3'
+        maven 'M3';
     }
     stages {
-    
-    	 stage('Information') {
-    	 	steps {
-    	 		sh "java -version";
-             	sh "mvn -veriosn";
-    	 	}
-    	 }
 
         stage('Build') { 
             steps {
@@ -19,15 +12,20 @@ pipeline {
         }
         stage('Test') { 
             steps {
-                // 
-                 echo "Test";
+                sh "mvn test";
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml' 
+                }
             }
         }
         stage('Deploy') { 
             steps {
                  echo "Deploy";
                  script{
-        			docker.build("demo")
+                 	sh "curl -X GET http://127.0.0.1:2375"
+        			//docker.build("demo")
     			}
             }
         }
