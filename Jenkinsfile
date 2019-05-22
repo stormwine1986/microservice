@@ -2,6 +2,7 @@ pipeline {
     agent any 
     tools {
         maven 'M3';
+        docker 'docker';
     }
     stages {
 
@@ -19,8 +20,7 @@ pipeline {
             steps {
                  echo "Deploy";
                  script{
-                 	sh "curl -X GET http://registry:5000/v1"
-        			//docker.build("demo")
+        			docker.build("demo");
     			}
             }
         }
