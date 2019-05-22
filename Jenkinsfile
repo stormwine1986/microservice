@@ -15,6 +15,7 @@ pipeline {
         stage('Build') { 
             steps {
                 sh "mvn clean package";
+                def customImage = docker.build("demo:${env.BUILD_ID}");
             }
         }
         stage('Test') { 
