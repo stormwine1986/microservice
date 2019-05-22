@@ -1,12 +1,14 @@
 pipeline {
     agent any 
-    def maven_home = ${tool name: 'M3', type: 'maven'};
+    tools {
+        maven 'Maven 3.3.9'
+        jdk 'jdk8'
+    }
     stages {
         stage('Build') { 
             steps {
                 // 
                 sh "mvn --veriosn"
-                echo maven_home;
             }
         }
         stage('Test') { 
