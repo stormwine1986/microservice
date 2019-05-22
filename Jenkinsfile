@@ -6,8 +6,10 @@ pipeline {
     stages {
     
     	 stage('Information') {
-    	     sh "java -version";
-             sh "mvn -veriosn";
+    	 	steps {
+    	 		sh "java -version";
+             	sh "mvn -veriosn";
+    	 	}
     	 }
 
         stage('Build') { 
