@@ -18,11 +18,15 @@ pipeline {
         stage('Deploy') { 
             steps {
                  echo "Deploy";
-                 script{
-	                 docker.withServer("unix:///var/run/docker.sock"){
-	        			docker.build("demo");
-	                 }
-                 }
+                 node {
+				    checkout scm
+				
+				    def customImage = docker.build("my-image:${env.BUILD_ID}")
+				
+				    customImage.inside {
+				        sh 'make test'
+				 	}
+				}
             }
         }
     }
