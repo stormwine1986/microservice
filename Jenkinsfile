@@ -14,8 +14,7 @@ pipeline {
 
         stage('Build') { 
             steps {
-                sh "mvn clean package";
-                docker.build("demo");
+                sh "mvn -B -DskipTests clean package";
             }
         }
         stage('Test') { 
@@ -26,8 +25,10 @@ pipeline {
         }
         stage('Deploy') { 
             steps {
-                // 
                  echo "Deploy";
+                 script{
+        			docker.build("demo")
+    			}
             }
         }
     }
