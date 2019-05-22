@@ -18,8 +18,10 @@ pipeline {
         stage('Deploy') { 
             steps {
                  echo "Deploy";
-                 docker.withServer("unix:///var/run/docker.sock"){
-        			docker.build("demo");
+                 script{
+	                 docker.withServer("unix:///var/run/docker.sock"){
+	        			docker.build("demo");
+	                 }
                  }
             }
         }
