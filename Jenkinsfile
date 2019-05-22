@@ -1,13 +1,13 @@
 pipeline {
     agent any 
     tools {
-        maven 'Maven 3.3.9'
-        jdk 'jdk8'
+        maven 'M3'
     }
     stages {
         stage('Build') { 
             steps {
                 // 
+                sh "java -version"
                 sh "mvn --veriosn"
             }
         }
