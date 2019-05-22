@@ -2,6 +2,7 @@ pipeline {
     agent any 
     tools {
         maven 'M3';
+        tool name: 'docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
     }
     stages {
 
@@ -20,11 +21,6 @@ pipeline {
                  echo "Deploy";
                  script {
 					
-				    def customImage = docker.build("my-image:${env.BUILD_ID}")
-				
-				    customImage.inside {
-				        sh 'make test'
-				 	}
 				}
             }
         }
