@@ -1,9 +1,10 @@
 node {
-   	def mvn = tool name: 'M3', type: 'maven'
+   	
     stages {
     
     	stage('Pre') {
     		steps {
+    			def mvn = tool name: 'M3', type: 'maven'
     			echo "${mvn}"
     		}
     	}
