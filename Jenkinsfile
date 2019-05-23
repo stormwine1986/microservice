@@ -1,7 +1,7 @@
-pipeline {
+node {
     agent any 
     tools {
-        maven 'M3';
+        maven 'M3'
     }
     stages {
 
@@ -18,9 +18,7 @@ pipeline {
         stage('Deploy') { 
             steps {
                  echo "Deploy";
-                 withTool{
-                 	
-                 }
+                
                  script {
 					docker.build("demo")
 				}
