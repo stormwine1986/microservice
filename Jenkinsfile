@@ -1,5 +1,5 @@
 node {
-   	def mvn = ${tool name: 'M3', type: 'maven'}
+   	def mvn = tool name: 'M3', type: 'maven'
     stages {
     
     	stage('Pre') {
