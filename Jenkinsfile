@@ -23,7 +23,7 @@ node {
    }
    stage('Deploy') {
       withEnv(["DOKCER_HOME=$dockerHome"]) {
-      		sh "$DOKCER_HOME/bin/docker build demo ."
+      		sh "$DOKCER_HOME/bin/docker build -t demo ."
       }
    }
 }
