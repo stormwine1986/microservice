@@ -1,32 +1,29 @@
 node {
-   	
-    stages {
-    
-    	stage('Pre') {
-    		steps {
-    			def mvn = tool name: 'M3', type: 'maven'
-    			echo "${mvn}"
-    		}
-    	}
-
-        stage('Build') { 
-            steps {
-                sh "mvn -B -DskipTests clean package";
-            }
-        }
-        stage('Test') { 
-            steps {
-                sh "mvn test";
-            }
-        }
-        stage('Deploy') { 
-            steps {
-                 echo "Deploy";
-                
-                 script {
-					docker.build("demo")
-				}
-            }
-        }
-    }
+   	def mvnHome
+	def dockerHome
+   	stage('Preparation') { // for display purposes
+      // Get some code from a GitHub repository
+      // git 'http://gitlib/stormwine/demo.git'
+      // Get the Maven tool.
+      // ** NOTE: This 'M3' Maven tool must be configured
+      // **       in the global configuration.           
+      mvnHome = tool 'M3'
+      dockerHome = tool 'docker'
+   	}
+   stage('Build') {
+      // Run the maven build
+      withEnv(["MVN_HOME=$mvnHome"]) {
+      		sh "$MVN_HOME/bin/mvn -B -DskipTests clean package"
+      }
+   }
+   stage('Test') {
+      withEnv(["MVN_HOME=$mvnHome"]) {
+      		sh "$MVN_HOME/bin/mvn test"
+      }
+   }
+   stage('Deploy') {
+      withEnv(["DOKCER_HOME=$dockerHome"]) {
+      		sh "$DOKCER_HOME/bin/docker build demo ."
+      }
+   }
 }
