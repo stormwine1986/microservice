@@ -2,7 +2,6 @@ pipeline {
     agent any 
     tools {
         maven 'M3';
-        tool name: 'docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
     }
     stages {
 
@@ -20,7 +19,7 @@ pipeline {
             steps {
                  echo "Deploy";
                  script {
-					
+					docker.build("demo")
 				}
             }
         }
