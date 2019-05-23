@@ -18,6 +18,9 @@ pipeline {
         stage('Deploy') { 
             steps {
                  echo "Deploy";
+                 withTool{
+                 	
+                 }
                  script {
 					docker.build("demo")
 				}
