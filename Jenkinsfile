@@ -23,6 +23,7 @@ node {
    stage('Deploy') {
       withEnv(["DOKCER_HOME=$dockerHome"]) {
       		sh "$DOKCER_HOME/bin/docker build -t 10.0.75.1:5000/demo ."
+      		sh "$DOKCER_HOME/bin/docker push 10.0.75.1:5000/demo"
       }
    }
 }
