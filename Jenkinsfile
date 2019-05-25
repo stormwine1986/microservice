@@ -9,6 +9,7 @@ node {
       // **       in the global configuration.           
       mvnHome = tool 'M3'
       dockerHome = tool 'docker'
+      git 'http://gitlib/root/ci-demo.git'
    	}
    stage('Build') {
       // Run the maven build
