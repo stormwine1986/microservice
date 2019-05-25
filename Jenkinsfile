@@ -1,19 +1,14 @@
 node {
+
    	def mvnHome
 	def dockerHome
 	
 	checkout scm
 	
-   	stage('Preparation') { // for display purposes
-      // Get some code from a GitHub repository
-      // git 'http://gitlib/stormwine/demo.git'
-      // Get the Maven tool.
-      // ** NOTE: This 'M3' Maven tool must be configured
-      // **       in the global configuration.           
+   stage('Preparation') {
       mvnHome = tool 'M3'
       dockerHome = tool 'docker'
-      // git 'http://gitlib/root/ci-demo.git'
-   	}
+   }
    stage('Build') {
       // Run the maven build
       withEnv(["MVN_HOME=$mvnHome"]) {
@@ -27,7 +22,7 @@ node {
    }
    stage('Deploy') {
       withEnv(["DOKCER_HOME=$dockerHome"]) {
-      		sh "$DOKCER_HOME/bin/docker build -t demo ."
+      		sh "$DOKCER_HOME/bin/docker build -t 10.0.75.1:5000/demo ."
       }
    }
 }
