@@ -1,0 +1,20 @@
+version: '3'
+
+
+services:
+    erueka:
+        image: demo/erueka
+        ports:
+            - 9010:9010
+        networks:
+            - cloud0
+            
+    admin:
+        image: demo/admin
+        ports:
+            - 9020:9020
+        networks:
+            - cloud0
+            
+networks:
+    cloud0:
