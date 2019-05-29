@@ -1,15 +1,11 @@
 package demo.msa;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
 
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -28,39 +24,16 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class HelloTest {
+@AutoConfigureMockMvc
+public class LocalServiceTest {
 	
 	@Autowired
 	private ILocalService localService;
-	
-	@InjectMocks
-	private IRemoteService remoteService = new RemoteService();
-	
-	@Mock
-	private IProxyService proxy;
-	
-	@Mock
-	private ILocalService localServiceMock;
-	
-	@Before
-    public void setUp() {
-		Result result = new Result();
-		result.setMux(2);
-		result.setAdd(3);
-		when(proxy.cal(1, 2)).thenReturn(result);
-		when(localServiceMock.cal(1, 2)).thenReturn(result);
-	}
 	
 	@Test
 	public void testLocalMethod() {
 		Result cal = localService.cal(1, 2);
 		assertEquals(2, cal.getMux());
 		assertEquals(3, cal.getAdd());
-	}
-	
-	@Test
-	public void testRemoteMethod() {
-		int cal = remoteService.cal(1, 2);
-		Assert.assertEquals(10, cal);
 	}
 }

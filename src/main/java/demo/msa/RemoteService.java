@@ -14,6 +14,7 @@ public class RemoteService implements IRemoteService {
 
 	@Override
 	public int cal(int a, int b) {
+		System.out.println("a = " + a + ", b = " + b);
 		Result cal = proxy.cal(a, b);
 		Result cal2 = localService.cal(a, b);
 		

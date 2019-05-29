@@ -11,6 +11,9 @@ public class HelloController {
 	
 	@Autowired
 	private RestTemplate restTemplate;
+	
+	@Autowired
+	private IRemoteService remoteService;
 
     @RequestMapping(method=RequestMethod.GET, path="/provider")
     public String provider() {
@@ -20,5 +23,11 @@ public class HelloController {
     @RequestMapping(method=RequestMethod.GET, path="/customer")
     public String customer() {
         return restTemplate.getForEntity("http://MICRO-SERVICE/provider", String.class).getBody();
+    }
+    
+    @RequestMapping(method=RequestMethod.GET, path="/cal")
+    public String cal(Command c) {
+    	System.out.println("a = " + c.getA() + ", b = " + c.getB());
+    	return String.valueOf(remoteService.cal(c.getA(), c.getB()));
     }
 }
