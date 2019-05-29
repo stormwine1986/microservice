@@ -1,7 +1,6 @@
 package demo.msa;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 
 import org.junit.Assert;
@@ -57,7 +56,6 @@ public class HelloTest {
 		Result cal = localService.cal(1, 2);
 		assertEquals(2, cal.getMux());
 		assertEquals(3, cal.getAdd());
-		fail();
 	}
 	
 	@Test
