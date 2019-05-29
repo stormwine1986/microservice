@@ -19,5 +19,8 @@ node {
       		sh "$DOKCER_HOME/bin/docker build -t 10.0.75.1:5000/microservice-demo ."
       		sh "$DOKCER_HOME/bin/docker push 10.0.75.1:5000/microservice-demo"
       }
+      post{
+	      junit allowEmptyResults: true, testResults: './target/surefire-reports/*.xml'      	
+      }
    }
 }
