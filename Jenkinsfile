@@ -10,20 +10,14 @@ node {
       dockerHome = tool 'docker'
    }
    stage('Build') {
-      // Run the maven build
+      // 编译，单元测试，and 打包
       withEnv(["MVN_HOME=$mvnHome"]) {
-      		sh "$MVN_HOME/bin/mvn -B -DskipTests clean package"
+      		sh "$MVN_HOME/bin/mvn -B clean package"
       }
-   }
-   stage('Test') {
-      withEnv(["MVN_HOME=$mvnHome"]) {
-      		sh "$MVN_HOME/bin/mvn test"
-      }
-   }
-   stage('Deploy') {
+      // 构建Docker image,并推入仓库
       withEnv(["DOKCER_HOME=$dockerHome"]) {
-      		sh "$DOKCER_HOME/bin/docker build -t 10.0.75.1:5000/demo ."
-      		sh "$DOKCER_HOME/bin/docker push 10.0.75.1:5000/demo"
+      		sh "$DOKCER_HOME/bin/docker build -t 10.0.75.1:5000/microservice-demo ."
+      		sh "$DOKCER_HOME/bin/docker push 10.0.75.1:5000/microservice-demo"
       }
    }
 }
