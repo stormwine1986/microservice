@@ -4,7 +4,6 @@ node {
 	def dockerHome
 	
 	checkout scm
-	stages {
 		
 	 	stage('Preparation') {
 		      mvnHome = tool 'M3'
@@ -27,7 +26,4 @@ node {
 		      	}
 		      }
 		}
-	}
-  
-  
 }
