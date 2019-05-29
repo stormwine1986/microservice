@@ -16,7 +16,7 @@ node {
 		      		try {
 			      		sh "$MVN_HOME/bin/mvn -B clean package"
         			}finally{
-        				junit allowEmptyResults: true, testResults: './target/surefire-reports/*.xml'      	
+        				junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'      	
         				
         			}
 		      }
