@@ -21,4 +21,11 @@ public class RemoteService implements IRemoteService {
 		return cal2.getAdd() + cal.getAdd() + cal2.getMux() + cal2.getMux();
 	}
 
+	public void setProxy(IProxyService proxy) {
+		this.proxy = proxy;
+	}
+
+	public void setLocalService(ILocalService localService) {
+		this.localService = localService;
+	}
 }
