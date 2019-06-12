@@ -6,11 +6,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class RemoteService implements IRemoteService {
 	
-	@Autowired
-	private IProxyService proxy; 
+	
+	private final IProxyService proxy; 
+	
+	
+	private final ILocalService localService;
 	
 	@Autowired
-	private ILocalService localService;
+	public RemoteService(IProxyService proxy, ILocalService localService) {
+		this.proxy = proxy;
+		this.localService = localService;
+	}
 
 	@Override
 	public int cal(int a, int b) {
@@ -19,13 +25,5 @@ public class RemoteService implements IRemoteService {
 		Result cal2 = localService.cal(a, b);
 		
 		return cal2.getAdd() + cal.getAdd() + cal2.getMux() + cal2.getMux();
-	}
-
-	public void setProxy(IProxyService proxy) {
-		this.proxy = proxy;
-	}
-
-	public void setLocalService(ILocalService localService) {
-		this.localService = localService;
 	}
 }

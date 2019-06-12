@@ -8,12 +8,9 @@ public class MockitoTest {
 	
 	@Test
 	public void test() {
-		RemoteService remoteService = new RemoteService();
 		LocalService localService = Mockito.mock(LocalService.class);
 		ProxyService proxyService = Mockito.mock(ProxyService.class);
-		
-		remoteService.setLocalService(localService);
-		remoteService.setProxy(proxyService);
+		RemoteService remoteService = new RemoteService(proxyService, localService);
 		
 		Result result = new Result();
 		result.setAdd(3);
